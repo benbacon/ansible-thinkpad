@@ -1,0 +1,41 @@
+---
+# From https://extensions.gnome.org/
+gnome_extension_ids:
+  - 307
+  - 19
+flatpaks:
+  - org.mozilla.firefox
+  - org.gnome.Extensions
+  - com.spotify.Client
+  - com.visualstudio.code
+  - io.atom.Atom
+  - org.remmina.Remmina
+  - org.videolan.VLC
+  - com.bitwarden.desktop
+  - org.signal.Signal
+  - org.chromium.Chromium
+  - org.vim.Vim
+  - org.gnome.Firmware
+ostreeInstallRpms:
+  - zsh
+ostreeUninstallRpms:
+  - firefox
+toolboxInstallRpms:
+  - zsh
+  - arc-theme
+  - gnome-tweak-tool
+  - gnome-shell
+dconfSettings:
+  - key: /org/gnome/settings-daemon/plugins/color/night-light-enabled
+    value: "true"
+  - key: /org/gnome/shell/extensions/user-theme/name
+    value: "'Arc-Dark'"
+  - key: /org/gnome/desktop/interface/icon-theme
+    value: "'Tela-dark'"
+  - key: /org/gnome/desktop/interface/gtk-theme
+    value: "'Arc-Dark'"
+  - key: /org/gnome/desktop/interface/clock-show-weekday
+    value: "true"
+homeDirectories:
+  - repos
+  - AppImage
