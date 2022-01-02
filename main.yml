@@ -27,7 +27,7 @@
       ansible.builtin.command: rpm-ostree upgrade
 
     - name: Create Toolbox
-      ansible.builtin.command: toolbox create
+      ansible.builtin.command: toolbox create -y
       register: toolboxCreate
       failed_when:
         - toolboxCreate.rc > 0
