@@ -6,6 +6,11 @@
     - config.yml
 
   tasks:
+    - name: Set hostname
+      ansible.builtin.hostname:
+        name: "{{ hostname }}"
+        use: systemd
+
     - name: Install overlay packages
       community.general.rpm_ostree_pkg:
         name: "{{ item }}"
@@ -74,15 +79,44 @@
         value: "{{ item.value }}"
       loop: "{{ dconfSettings }}"
 
-  #  - name: Modify wifi settings
-  #    community.general.nmcli:
-  #      type: wifi
-  #      conn_name: 
-  #      wifi_sec:
-  #        key-mgmt: wpa-psk
-  #        psk: my_password
-  #      autoconnect: true
-  #      state: present
+    - name: Set charge start threshold
+      ansible.builtin.copy:
+        dest: /sys/class/power_supply/BAT0/charge_control_start_threshold
+      content: "{{ startChargeThreshold }}"
+      become: yes
+
+    - name: Set charge end threshold
+      ansible.builtin.copy:
+        dest: /sys/class/power_supply/BAT0/charge_control_end_threshold
+      content: "{{ endChargeThreshold }}"
+      become: yes
+
+    - name: Enable wifi MAC randomisation
+      ansible.builtin.copy:
+        dest: /etc/NetworkManager/conf.d/mac-randomization.conf
+      content: |
+        [device-mac-randomization]
+        wifi.scan-rand-mac-address=yes
+        [connection-mac-randomization]
+        #ethernet.assigned-mac-address=random
+        wifi.assigned-mac-address=random
+      become: yes
+
+    - name: Modify wifi connection settings
+      community.general.nmcli:
+        type: wifi
+        conn_name: "{{ networkManagerConnectionName }}"
+        wifi:
+          assigned-mac-address: preserve
+        wifi_sec:
+          auth-alg: ""
+          key-mgmt: sae
+          pmf: 3
+
+    - name: Restart NetworkManager service
+      ansible.builtin.service:
+        name: NetworkManager
+        state: restarted
 
     - name: Add shortcut to Gnome Tweaks
       ansible.builtin.copy:
