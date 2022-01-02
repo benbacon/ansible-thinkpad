@@ -82,24 +82,24 @@
     - name: Set charge start threshold
       ansible.builtin.copy:
         dest: /sys/class/power_supply/BAT0/charge_control_start_threshold
-      content: "{{ startChargeThreshold }}"
+        content: "{{ startChargeThreshold }}"
       become: yes
 
     - name: Set charge end threshold
       ansible.builtin.copy:
         dest: /sys/class/power_supply/BAT0/charge_control_end_threshold
-      content: "{{ endChargeThreshold }}"
+        content: "{{ endChargeThreshold }}"
       become: yes
 
     - name: Enable wifi MAC randomisation
       ansible.builtin.copy:
         dest: /etc/NetworkManager/conf.d/mac-randomization.conf
-      content: |
-        [device-mac-randomization]
-        wifi.scan-rand-mac-address=yes
-        [connection-mac-randomization]
-        #ethernet.assigned-mac-address=random
-        wifi.assigned-mac-address=random
+        content: |
+          [device-mac-randomization]
+          wifi.scan-rand-mac-address=yes
+          [connection-mac-randomization]
+          #ethernet.assigned-mac-address=random
+          wifi.assigned-mac-address=random
       become: yes
 
     - name: Modify wifi connection settings
