@@ -1,6 +1,9 @@
 ---
 username: ben
 hostname: BenLaptop
+startChargeThreshold: 40
+endChargeThreshold: 70
+wifiSSID: nameOfWPA3SSID
 # From https://extensions.gnome.org/
 gnome_extension_ids:
   - 307
@@ -81,6 +84,3 @@ homeDirectories:
   - repos
   - AppImage
   - .themes
-startChargeThreshold: 40
-endChargeThreshold: 70
-wifiSSID: nameOfWPA3SSID
