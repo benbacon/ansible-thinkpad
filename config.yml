@@ -24,7 +24,7 @@ ostreeUninstallRpms:
   - firefox
 toolboxInstallRpms:
   - zsh
-#  - arc-theme
+  - arc-theme
   - gnome-tweak-tool
   - gnome-shell
 dconfSettings:
@@ -75,7 +75,7 @@ dconfSettings:
 homeDirectories:
   - repos
   - AppImage
-#  - .themes
+  - .themes
 startChargeThreshold: 40
 endChargeThreshold: 70
 networkManagerConnectionName: nameOfWPA3Network

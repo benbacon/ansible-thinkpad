@@ -69,7 +69,7 @@
         path: "~/{{ item }}"
         state: directory
       loop: "{{ homeDirectories }}"
-    
+
     - name: Pull Tela icons
       ansible.builtin.git:
         repo: 'https://github.com/vinceliuice/Tela-icon-theme.git'
@@ -81,7 +81,8 @@
       args:
         chdir: ~/repos/Tela-icon-theme
     
-#    - name: Copy themes to home directory     
+    - name: Copy themes to home directory
+      ansible.builtin.command: toolbox run cp -R /usr/share/themes/Arc-Dark ~/.themes/
     
     - name: Include GNOME Extensions role
       include_role:
