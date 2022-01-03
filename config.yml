@@ -22,6 +22,11 @@ flatpaks:
   - org.gnome.Firmware
   - org.gnome.Boxes
   - ca.desrt.dconf-editor
+  - org.fedoraproject.MediaWriter
+  - com.discordapp.Discord
+  - org.keepassxc.KeePassXC
+  - org.qbittorrent.qBittorrent
+  - org.wireshark.Wireshark
 ostreeInstallRpms:
   - zsh
 ostreeUninstallRpms:
