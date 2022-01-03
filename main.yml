@@ -147,11 +147,12 @@
         name: NetworkManager
         state: restarted
 
-    - name: Reboot
-      block:
-        - name: Pause Reboot
-          ansible.builtin.pause:
-            prompt: "System will reboot in 1 minute"
-            minutes: 1
-        - name: Reboot system
-          ansible.builtin.command: systemctl reboot
+    - name: Pause Reboot
+      ansible.builtin.pause:
+        prompt: "System will reboot in 1 minute"
+        minutes: 1
+      listen: "Reboot"
+
+    - name: Reboot system
+      ansible.builtin.command: systemctl reboot
+      listen: "Reboot"
