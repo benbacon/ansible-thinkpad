@@ -4,6 +4,8 @@ An Ansible Playbook to configure a fresh (opinionated) installation of Fedora Si
 To run, you will need access to a system with Fedora Silverblue installed and with internet connectivity. Pull the repo and execute the main.sh script. E.g:
 
 ```
+mkdir -p ~/repos
+cd ~/repos
 git pull https://github.com/benbacon/ansible-thinkpad.git
 cd ansible-thinkpad
 ./main.sh
