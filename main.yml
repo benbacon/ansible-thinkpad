@@ -21,6 +21,10 @@
 
     - name: Remove ostree packages
       ansible.builtin.command: "rpm-ostree override remove {{ ostreeUninstallRpms | join(' ') }}"
+      register: ostreePackageRemove
+      failed_when:
+        - ostreePackageRemove.rc > 0
+        - '"Override already exists for package" not in ostreePackageRemove.stderr'
       notify:
       - Reboot
 
