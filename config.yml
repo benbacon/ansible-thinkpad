@@ -18,6 +18,7 @@ flatpaks:
   - org.chromium.Chromium
   - org.gnome.Firmware
   - org.gtk.Gtk3theme.Arc-Dark
+  - org.gnome.Boxes
 ostreeInstallRpms:
   - zsh
 ostreeUninstallRpms:
