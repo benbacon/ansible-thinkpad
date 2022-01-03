@@ -6,7 +6,7 @@ To run, you will need access to a system with Fedora Silverblue installed and wi
 ```
 mkdir -p ~/repos
 cd ~/repos
-git pull https://github.com/benbacon/ansible-thinkpad.git
+git clone https://github.com/benbacon/ansible-thinkpad.git
 cd ansible-thinkpad
 ./main.sh
 ```
