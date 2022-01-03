@@ -1,0 +1,91 @@
+---
+username: ben
+hostname: BenLaptop
+startChargeThreshold: 40
+endChargeThreshold: 70
+wifiSSID: nameOfWPA3SSID
+# From https://extensions.gnome.org/
+gnome_extension_ids:
+  - 307
+  - 19
+flatpaks:
+  - org.mozilla.firefox
+  - org.gnome.Extensions
+  - com.spotify.Client
+  - com.visualstudio.code
+  - io.atom.Atom
+  - org.remmina.Remmina
+  - org.videolan.VLC
+  - com.bitwarden.desktop
+  - org.signal.Signal
+  - org.chromium.Chromium
+  - org.gnome.Firmware
+  - org.gnome.Boxes
+  - ca.desrt.dconf-editor
+  - org.fedoraproject.MediaWriter
+  - com.discordapp.Discord
+  - org.keepassxc.KeePassXC
+  - org.qbittorrent.qBittorrent
+  - org.wireshark.Wireshark
+ostreeInstallRpms:
+  - zsh
+ostreeUninstallRpms:
+  - firefox
+toolboxInstallRpms:
+  - zsh
+  - arc-theme
+  - gnome-tweak-tool
+  - gnome-shell
+dconfSettings:
+  - key: /org/gnome/settings-daemon/plugins/color/night-light-enabled
+    value: "true"
+  - key: /org/gnome/shell/extensions/dash-to-dock/background-opacity
+    value: "0.8"
+  - key: /org/gnome/shell/extensions/dash-to-dock/click-action
+    value: "'previews'"
+  - key: /org/gnome/shell/extensions/dash-to-dock/dash-max-icon-size
+    value: "32"
+  - key: /org/gnome/shell/extensions/dash-to-dock/dock-fixed
+    value: "true"
+  - key: /org/gnome/shell/extensions/dash-to-dock/dock-position
+    value: "'LEFT'"
+  - key: /org/gnome/shell/extensions/dash-to-dock/extend-height
+    value: "true"
+  - key: /org/gnome/shell/extensions/dash-to-dock/multi-monitor
+    value: "true"
+  - key: /org/gnome/shell/extensions/dash-to-dock/transparency-mode
+    value: "'DYNAMIC'"
+  - key: /org/gnome/shell/extensions/dash-to-dock/custom-theme-shrink
+    value: "true"
+  - key: /org/gnome/shell/extensions/user-theme/name
+    value: "'Arc-Dark'"
+  - key: /org/gnome/shell/enabled-extensions
+    value: "['background-logo@fedorahosted.org', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'dash-to-dock@micxgx.gmail.com']"
+  - key: /org/gnome/shell/favorite-apps
+    value: "['org.mozilla.firefox.desktop', 'org.gnome.Nautilus.desktop']"
+  - key: /org/gnome/desktop/interface/icon-theme
+    value: "'Tela-dark'"
+  - key: /org/gnome/desktop/interface/gtk-theme
+    value: "'Arc-Dark'"
+  - key: /org/gnome/desktop/interface/clock-show-weekday
+    value: "true"
+  - key: /org/gnome/desktop/interface/show-battery-percentage
+    value: "true"
+  - key: /org/gnome/desktop/peripherals/touchpad/natural-scroll
+    value: "false"
+  - key: /org/gnome/desktop/peripherals/touchpad/tap-to-click
+    value: "true"
+  - key: /org/gnome/settings-daemon/plugins/power/idle-dim
+    value: "true"
+  - key: /org/gnome/desktop/notifications/show-in-lock-screen
+    value: "false"
+  - key: /org/gnome/desktop/screensaver/lock-delay
+    value: "30"
+  - key: /org/gnome/desktop/privacy/remove-old-temp-files
+    value: "true"
+  - key: /org/gnome/desktop/privacy/remove-old-trash-files
+    value: "true"
+homeDirectories:
+  - repos
+  - AppImage
+  - .themes

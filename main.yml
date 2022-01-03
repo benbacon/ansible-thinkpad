@@ -1,0 +1,158 @@
+---
+- hosts: localhost
+  connection: local
+
+  vars_files:
+    - config.yml
+
+  tasks:
+    - name: Set hostname
+      ansible.builtin.hostname:
+        name: "{{ hostname }}"
+        use: systemd
+
+    - name: Install overlay packages
+      community.general.rpm_ostree_pkg:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ ostreeInstallRpms }}"
+      notify:
+      - Reboot
+
+    - name: Remove ostree packages
+      ansible.builtin.command: "rpm-ostree override remove {{ ostreeUninstallRpms | join(' ') }}"
+      register: ostreePackageRemove
+      failed_when:
+        - ostreePackageRemove.rc > 0
+        - '"Override already exists for package" not in ostreePackageRemove.stderr'
+      notify:
+      - Reboot
+
+    - name: Update Silverblue
+      ansible.builtin.command: rpm-ostree upgrade
+      notify:
+      - Reboot
+
+    - name: Create Toolbox
+      ansible.builtin.command: toolbox create -y
+      register: toolboxCreate
+      failed_when:
+        - toolboxCreate.rc > 0
+        - '"already exists" not in toolboxCreate.stderr'
+
+    - name: Install Toolbox packages
+      ansible.builtin.command: "toolbox run sudo dnf install -y {{ toolboxInstallRpms | join(' ') }}"
+
+    - name: Change default shell to zsh
+      ansible.builtin.command: "usermod --shell /bin/zsh {{ username }}"
+      become: yes
+
+    - name: Remove the default flathub flatpak repository remote
+      community.general.flatpak_remote:
+        name: flathub
+        state: absent
+
+    - name: Add the flathub flatpak repository remote
+      community.general.flatpak_remote:
+        name: flathub
+        state: present
+        flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+    
+    - name: Install flatpak packages
+      community.general.flatpak:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ flatpaks }}"
+
+    - name: Create directories
+      ansible.builtin.file:
+        path: "~/{{ item }}"
+        state: directory
+      loop: "{{ homeDirectories }}"
+
+    - name: Pull Tela icons
+      ansible.builtin.git:
+        repo: 'https://github.com/vinceliuice/Tela-icon-theme.git'
+        dest: ~/repos/Tela-icon-theme
+        update: no
+
+    - name: Install Tela icons
+      ansible.builtin.command: ./install.sh
+      args:
+        chdir: ~/repos/Tela-icon-theme
+    
+    - name: Copy themes to home directory
+      ansible.builtin.command: toolbox run cp -R /usr/share/themes/Arc-Dark ~/.themes/
+    
+    - name: Include GNOME Extensions role
+      include_role:
+        name: jaredhocutt.gnome_extensions
+
+    - name: Change dconf settings
+      community.general.dconf:
+        key: "{{ item.key }}"
+        value: "{{ item.value }}"
+      loop: "{{ dconfSettings }}"
+
+    - name: Set charge start threshold
+      ansible.builtin.shell: echo "{{ startChargeThreshold }}" > /sys/class/power_supply/BAT0/charge_control_start_threshold
+      become: yes
+
+    - name: Set charge end threshold
+      ansible.builtin.shell: echo "{{ endChargeThreshold }}" > /sys/class/power_supply/BAT0/charge_control_end_threshold
+      become: yes
+
+    - name: Enable wifi MAC randomisation
+      ansible.builtin.copy:
+        dest: /etc/NetworkManager/conf.d/mac-randomization.conf
+        content: |
+          [device-mac-randomization]
+          wifi.scan-rand-mac-address=yes
+          [connection-mac-randomization]
+          #ethernet.assigned-mac-address=random
+          wifi.assigned-mac-address=random
+      become: yes
+      notify:
+      - Restart NetworkManager
+
+    - name: Modify wifi connection settings
+      community.general.nmcli:
+        type: wifi
+        conn_name: "{{ wifiSSID }}"
+        ssid: "{{ wifiSSID }}"
+        wifi:
+          cloned-mac-address: preserve
+        wifi_sec:
+          auth-alg: ""
+          key-mgmt: sae
+          pmf: 3
+        state: present
+      notify:
+      - Restart NetworkManager
+
+    - name: Add shortcut to Gnome Tweaks
+      ansible.builtin.copy:
+        dest: ~/.local/share/applications/GnomeTweaks.desktop
+        content: |
+          [Desktop Entry]
+          Type=Application
+          Name=Gnome Tweaks (toolbox)
+          Exec=/bin/toolbox run gnome-tweaks
+          Icon=org.gnome.Settings
+          Terminal=false
+
+  handlers:
+    - name: Restart NetworkManager
+      ansible.builtin.service:
+        name: NetworkManager
+        state: restarted
+
+    - name: Pause Reboot
+      ansible.builtin.pause:
+        prompt: "System will reboot in 1 minute"
+        minutes: 1
+      listen: "Reboot"
+
+    - name: Reboot system
+      ansible.builtin.command: systemctl reboot
+      listen: "Reboot"
