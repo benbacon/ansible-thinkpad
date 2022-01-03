@@ -118,8 +118,8 @@
     - name: Modify wifi connection settings
       community.general.nmcli:
         type: wifi
-        conn_name: "{{ networkManagerConnectionName }}"
-        ssid: "{{ networkManagerConnectionName }}"
+        conn_name: "{{ wifiSSID }}"
+        ssid: "{{ wifiSSID }}"
         wifi:
           cloned-mac-address: preserve
         wifi_sec:
@@ -148,4 +148,10 @@
         state: restarted
 
     - name: Reboot
-      ansible.builtin.command: systemctl reboot
+      block:
+        - name: Pause Reboot
+          ansible.builtin.pause:
+            prompt: "System will reboot in 1 minute"
+            minutes: 1
+        - name: Reboot system
+          ansible.builtin.command: systemctl reboot

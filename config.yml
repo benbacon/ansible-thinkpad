@@ -17,8 +17,8 @@ flatpaks:
   - org.signal.Signal
   - org.chromium.Chromium
   - org.gnome.Firmware
-  - org.gtk.Gtk3theme.Arc-Dark
   - org.gnome.Boxes
+  - ca.desrt.dconf-editor
 ostreeInstallRpms:
   - zsh
 ostreeUninstallRpms:
@@ -51,6 +51,10 @@ dconfSettings:
     value: "true"
   - key: /org/gnome/shell/extensions/user-theme/name
     value: "'Arc-Dark'"
+  - key: /org/gnome/shell/enabled-extensions
+    value: "['background-logo@fedorahosted.org', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'dash-to-dock@micxgx.gmail.com']"
+  - key: /org/gnome/shell/favorite-apps
+    value: "['org.mozilla.firefox.desktop', 'org.gnome.Nautilus.desktop']"
   - key: /org/gnome/desktop/interface/icon-theme
     value: "'Tela-dark'"
   - key: /org/gnome/desktop/interface/gtk-theme
@@ -79,4 +83,4 @@ homeDirectories:
   - .themes
 startChargeThreshold: 40
 endChargeThreshold: 70
-networkManagerConnectionName: nameOfWPA3Network
+wifiSSID: nameOfWPA3SSID
