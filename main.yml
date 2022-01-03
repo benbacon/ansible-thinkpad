@@ -16,15 +16,18 @@
         name: "{{ item }}"
         state: present
       loop: "{{ ostreeInstallRpms }}"
+      notify:
+      - Reboot
 
-    - name: Remove overlay packages
-      community.general.rpm_ostree_pkg:
-        name: "{{ item }}"
-        state: absent
-      loop: "{{ ostreeUninstallRpms }}"
+    - name: Remove ostree packages
+      ansible.builtin.command: "rpm-ostree override remove {{ ostreeUninstallRpms | join(' ') }}"
+      notify:
+      - Reboot
 
     - name: Update Silverblue
       ansible.builtin.command: rpm-ostree upgrade
+      notify:
+      - Reboot
 
     - name: Create Toolbox
       ansible.builtin.command: toolbox create -y
@@ -37,10 +40,15 @@
       ansible.builtin.command: "toolbox run sudo dnf install -y {{ toolboxInstallRpms | join(' ') }}"
 
     - name: Change default shell to zsh
-      ansible.builtin.command: usermod --shell /bin/zsh $USER
+      ansible.builtin.command: "usermod --shell /bin/zsh {{ username }}"
       become: yes
 
-    - name: Add the flathub flatpak repository remote to the user installation
+    - name: Remove the default flathub flatpak repository remote
+      community.general.flatpak_remote:
+        name: flathub
+        state: absent
+
+    - name: Add the flathub flatpak repository remote
       community.general.flatpak_remote:
         name: flathub
         state: present
@@ -68,7 +76,9 @@
       ansible.builtin.command: ./install.sh
       args:
         chdir: ~/repos/Tela-icon-theme
-
+    
+#    - name: Copy themes to home directory     
+    
     - name: Include GNOME Extensions role
       include_role:
         name: jaredhocutt.gnome_extensions
@@ -80,15 +90,11 @@
       loop: "{{ dconfSettings }}"
 
     - name: Set charge start threshold
-      ansible.builtin.copy:
-        dest: /sys/class/power_supply/BAT0/charge_control_start_threshold
-        content: "{{ startChargeThreshold }}"
+      ansible.builtin.shell: echo "{{ startChargeThreshold }}" > /sys/class/power_supply/BAT0/charge_control_start_threshold
       become: yes
 
     - name: Set charge end threshold
-      ansible.builtin.copy:
-        dest: /sys/class/power_supply/BAT0/charge_control_end_threshold
-        content: "{{ endChargeThreshold }}"
+      ansible.builtin.shell: echo "{{ endChargeThreshold }}" > /sys/class/power_supply/BAT0/charge_control_end_threshold
       become: yes
 
     - name: Enable wifi MAC randomisation
@@ -101,22 +107,23 @@
           #ethernet.assigned-mac-address=random
           wifi.assigned-mac-address=random
       become: yes
+      notify:
+      - Restart NetworkManager
 
     - name: Modify wifi connection settings
       community.general.nmcli:
         type: wifi
         conn_name: "{{ networkManagerConnectionName }}"
+        ssid: "{{ networkManagerConnectionName }}"
         wifi:
-          assigned-mac-address: preserve
+          cloned-mac-address: preserve
         wifi_sec:
           auth-alg: ""
           key-mgmt: sae
           pmf: 3
-
-    - name: Restart NetworkManager service
-      ansible.builtin.service:
-        name: NetworkManager
-        state: restarted
+        state: present
+      notify:
+      - Restart NetworkManager
 
     - name: Add shortcut to Gnome Tweaks
       ansible.builtin.copy:
@@ -128,3 +135,12 @@
           Exec=/bin/toolbox run gnome-tweaks
           Icon=org.gnome.Settings
           Terminal=false
+
+  handlers:
+    - name: Restart NetworkManager
+      ansible.builtin.service:
+        name: NetworkManager
+        state: restarted
+
+    - name: Reboot
+      ansible.builtin.reboot:

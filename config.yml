@@ -1,4 +1,5 @@
 ---
+username: ben
 hostname: BenLaptop
 # From https://extensions.gnome.org/
 gnome_extension_ids:
@@ -16,17 +17,36 @@ flatpaks:
   - org.signal.Signal
   - org.chromium.Chromium
   - org.gnome.Firmware
+  - org.gtk.Gtk3theme.Arc-Dark
 ostreeInstallRpms:
   - zsh
 ostreeUninstallRpms:
   - firefox
 toolboxInstallRpms:
   - zsh
-  - arc-theme
+#  - arc-theme
   - gnome-tweak-tool
   - gnome-shell
 dconfSettings:
   - key: /org/gnome/settings-daemon/plugins/color/night-light-enabled
+    value: "true"
+  - key: /org/gnome/shell/extensions/dash-to-dock/background-opacity
+    value: "0.8"
+  - key: /org/gnome/shell/extensions/dash-to-dock/click-action
+    value: "'previews'"
+  - key: /org/gnome/shell/extensions/dash-to-dock/dash-max-icon-size
+    value: "32"
+  - key: /org/gnome/shell/extensions/dash-to-dock/dock-fixed
+    value: "true"
+  - key: /org/gnome/shell/extensions/dash-to-dock/dock-position
+    value: "'LEFT'"
+  - key: /org/gnome/shell/extensions/dash-to-dock/extend-height
+    value: "true"
+  - key: /org/gnome/shell/extensions/dash-to-dock/multi-monitor
+    value: "true"
+  - key: /org/gnome/shell/extensions/dash-to-dock/transparency-mode
+    value: "'DYNAMIC'"
+  - key: /org/gnome/shell/extensions/dash-to-dock/custom-theme-shrink
     value: "true"
   - key: /org/gnome/shell/extensions/user-theme/name
     value: "'Arc-Dark'"
@@ -55,6 +75,7 @@ dconfSettings:
 homeDirectories:
   - repos
   - AppImage
+#  - .themes
 startChargeThreshold: 40
 endChargeThreshold: 70
 networkManagerConnectionName: nameOfWPA3Network
