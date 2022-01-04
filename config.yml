@@ -57,6 +57,8 @@ dconfSettings:
     value: "'DYNAMIC'"
   - key: /org/gnome/shell/extensions/dash-to-dock/custom-theme-shrink
     value: "true"
+  - key: /org/gnome/shell/extensions/dash-to-dock/show-trash
+    value: "false"
   - key: /org/gnome/shell/extensions/user-theme/name
     value: "'Arc-Dark'"
   - key: /org/gnome/shell/enabled-extensions
@@ -84,6 +86,10 @@ dconfSettings:
   - key: /org/gnome/desktop/privacy/remove-old-temp-files
     value: "true"
   - key: /org/gnome/desktop/privacy/remove-old-trash-files
+    value: "true"
+  - key: /org/gnome/desktop/datetime/automatic-timezone
+    value: "true"
+  - key: /org/gnome/shell/weather/automatic-location
     value: "true"
 homeDirectories:
   - repos
