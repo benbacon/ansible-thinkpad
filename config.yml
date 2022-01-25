@@ -28,6 +28,7 @@ flatpaks:
   - org.qbittorrent.qBittorrent
   - org.wireshark.Wireshark
   - org.gnome.PowerStats
+  - com.mattjakeman.ExtensionManager
 ostreeInstallRpms:
   - zsh
 ostreeUninstallRpms:
