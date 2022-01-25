@@ -10,7 +10,6 @@ gnome_extension_ids:
   - 19
 flatpaks:
   - org.mozilla.firefox
-  - org.gnome.Extensions
   - com.spotify.Client
   - com.visualstudio.code
   - io.atom.Atom
