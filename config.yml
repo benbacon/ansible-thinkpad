@@ -8,6 +8,7 @@ wifiSSID: nameOfWPA3SSID
 gnome_extension_ids:
   - 307
   - 19
+  - 2398
 flatpaks:
   - org.mozilla.firefox
   - com.spotify.Client
