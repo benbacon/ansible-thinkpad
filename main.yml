@@ -64,6 +64,10 @@
         state: present
       loop: "{{ flatpaks }}"
 
+    - name: Change Firefox flatpak to use native Wayland
+      ansible.builtin.command: flatpak override --socket=wayland --env=MOZ_ENABLE_WAYLAND=1 org.mozilla.firefox
+      become: yes
+
     - name: Create directories
       ansible.builtin.file:
         path: "~/{{ item }}"
