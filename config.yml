@@ -94,6 +94,8 @@ dconfSettings:
     value: "true"
   - key: /org/gnome/shell/weather/automatic-location
     value: "true"
+  - key: /org/gnome/mutter/experimental-features
+    value: "['scale-monitor-framebuffer']"
 homeDirectories:
   - repos
   - AppImage
