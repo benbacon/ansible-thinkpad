@@ -97,7 +97,7 @@ dconfSettings:
   - key: /org/gnome/shell/weather/automatic-location
     value: "true"
   - key: /org/gnome/desktop/interface/text-scaling-factor
-    value: "1.1"
+    value: "1"
   - key: /org/gnome/desktop/interface/font-antialiasing
     value: "'rgba'"
 homeDirectories:
