@@ -6,32 +6,37 @@ endChargeThreshold: 70
 wifiSSID: nameOfWPA3SSID
 # From https://extensions.gnome.org/
 gnome_extension_ids:
-  - 307
+  - 5004
   - 19
-  - 2398
   - 2
+  - 906
+  - 3733
+  - 615
+  - 4798
 flatpaks:
   - org.mozilla.firefox
   - com.spotify.Client
   - com.visualstudio.code
-  - io.atom.Atom
   - org.remmina.Remmina
   - org.videolan.VLC
   - com.bitwarden.desktop
   - org.signal.Signal
   - org.chromium.Chromium
   - org.gnome.Firmware
-  - org.gnome.Boxes
   - ca.desrt.dconf-editor
   - org.fedoraproject.MediaWriter
-  - com.discordapp.Discord
   - org.keepassxc.KeePassXC
   - org.qbittorrent.qBittorrent
   - org.wireshark.Wireshark
-  - org.gnome.PowerStats
   - com.mattjakeman.ExtensionManager
+  - org.freedesktop.Platform.ffmpeg-full
+  - org.gtk.Gtk3theme.Arc
 ostreeInstallRpms:
   - zsh
+  - solaar
+  - virt-manager
+  - qemu-kvm
+  - tmux
 ostreeUninstallRpms:
   - firefox
 toolboxInstallRpms:
@@ -46,6 +51,8 @@ dconfSettings:
     value: "0.8"
   - key: /org/gnome/shell/extensions/dash-to-dock/click-action
     value: "'previews'"
+  - key: /org/gnome/shell/extensions/dash-to-dock/scroll-action
+    value: "'cycle-windows'"
   - key: /org/gnome/shell/extensions/dash-to-dock/dash-max-icon-size
     value: "32"
   - key: /org/gnome/shell/extensions/dash-to-dock/dock-fixed
