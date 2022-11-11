@@ -51,13 +51,15 @@
       community.general.flatpak_remote:
         name: flathub
         state: absent
+      become: yes
 
     - name: Add the flathub flatpak repository remote
       community.general.flatpak_remote:
         name: flathub
         state: present
         flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
-    
+      become: yes
+
     - name: Install flatpak packages
       community.general.flatpak:
         name: "{{ item }}"

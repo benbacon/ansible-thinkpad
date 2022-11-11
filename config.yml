@@ -29,7 +29,6 @@ flatpaks:
   - org.qbittorrent.qBittorrent
   - org.wireshark.Wireshark
   - com.mattjakeman.ExtensionManager
-  - org.freedesktop.Platform.ffmpeg-full
   - org.gtk.Gtk3theme.Arc
   - org.standardnotes.standardnotes
 ostreeInstallRpms:
