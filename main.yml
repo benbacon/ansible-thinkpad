@@ -25,6 +25,9 @@
       failed_when:
         - ostreePackageRemove.rc > 0
         - '"Override already exists for package" not in ostreePackageRemove.stderr'
+      until: "ostreePackageRemove is not failed"
+      retries: 6
+      delay: 10
       notify:
       - Reboot
 
@@ -51,18 +54,24 @@
       community.general.flatpak_remote:
         name: flathub
         state: absent
+      become: yes
 
     - name: Add the flathub flatpak repository remote
       community.general.flatpak_remote:
         name: flathub
         state: present
         flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
-    
+      become: yes
+
     - name: Install flatpak packages
       community.general.flatpak:
         name: "{{ item }}"
         state: present
       loop: "{{ flatpaks }}"
+      register: flatpakInstall
+      until: "flatpakInstall is not failed"
+      retries: 6
+      delay: 10
 
     - name: Change Firefox flatpak to use native Wayland
       ansible.builtin.command: flatpak override --socket=wayland --env=MOZ_ENABLE_WAYLAND=1 org.mozilla.firefox
@@ -97,14 +106,6 @@
         key: "{{ item.key }}"
         value: "{{ item.value }}"
       loop: "{{ dconfSettings }}"
-
-    - name: Set charge start threshold
-      ansible.builtin.shell: echo "{{ startChargeThreshold }}" > /sys/class/power_supply/BAT0/charge_control_start_threshold
-      become: yes
-
-    - name: Set charge end threshold
-      ansible.builtin.shell: echo "{{ endChargeThreshold }}" > /sys/class/power_supply/BAT0/charge_control_end_threshold
-      become: yes
 
     - name: Enable wifi MAC randomisation
       ansible.builtin.copy:

@@ -1,6 +1,6 @@
 ---
 username: ben
-hostname: BenLaptop
+hostname: ben-t14s
 startChargeThreshold: 40
 endChargeThreshold: 70
 wifiSSID: nameOfWPA3SSID
@@ -8,31 +8,35 @@ wifiSSID: nameOfWPA3SSID
 gnome_extension_ids:
   - 307
   - 19
-  - 2398
   - 2
+  - 3733
+  - 615
+  - 4798
 flatpaks:
   - org.mozilla.firefox
-  - com.spotify.Client
   - com.visualstudio.code
-  - io.atom.Atom
   - org.remmina.Remmina
   - org.videolan.VLC
   - com.bitwarden.desktop
   - org.signal.Signal
   - org.chromium.Chromium
   - org.gnome.Firmware
-  - org.gnome.Boxes
   - ca.desrt.dconf-editor
   - org.fedoraproject.MediaWriter
-  - com.discordapp.Discord
   - org.keepassxc.KeePassXC
   - org.qbittorrent.qBittorrent
   - org.wireshark.Wireshark
-  - org.gnome.PowerStats
   - com.mattjakeman.ExtensionManager
+  - org.gtk.Gtk3theme.Arc
+  - org.standardnotes.standardnotes
 ostreeInstallRpms:
   - zsh
+  - solaar
+  - virt-manager
+  - qemu-kvm
+  - tmux
 ostreeUninstallRpms:
+  - firefox-langpacks
   - firefox
 toolboxInstallRpms:
   - zsh
@@ -42,38 +46,50 @@ toolboxInstallRpms:
 dconfSettings:
   - key: /org/gnome/settings-daemon/plugins/color/night-light-enabled
     value: "true"
+  - key: /org/gnome/settings-daemon/plugins/color/night-light-schedule-from
+    value: "21"
+  - key: /org/gnome/settings-daemon/plugins/color/night-light-schedule-to
+    value: "7"
   - key: /org/gnome/shell/extensions/dash-to-dock/background-opacity
     value: "0.8"
   - key: /org/gnome/shell/extensions/dash-to-dock/click-action
     value: "'previews'"
+  - key: /org/gnome/shell/extensions/dash-to-dock/scroll-action
+    value: "'cycle-windows'"
   - key: /org/gnome/shell/extensions/dash-to-dock/dash-max-icon-size
     value: "32"
+  - key: /org/gnome/shell/extensions/dash-to-dock/dock-alignment
+    value: "'CENTRE'"
   - key: /org/gnome/shell/extensions/dash-to-dock/dock-fixed
     value: "true"
   - key: /org/gnome/shell/extensions/dash-to-dock/dock-position
     value: "'LEFT'"
   - key: /org/gnome/shell/extensions/dash-to-dock/extend-height
     value: "true"
-  - key: /org/gnome/shell/extensions/dash-to-dock/multi-monitor
-    value: "true"
-  - key: /org/gnome/shell/extensions/dash-to-dock/transparency-mode
-    value: "'DYNAMIC'"
-  - key: /org/gnome/shell/extensions/dash-to-dock/custom-theme-shrink
-    value: "true"
   - key: /org/gnome/shell/extensions/dash-to-dock/show-trash
     value: "false"
   - key: /org/gnome/shell/extensions/dash-to-dock/isolate-monitors
     value: "true"
+  - key: /org/gnome/shell/extensions/dash-to-dock/scroll-action
+    value: "'cycle-windows'"
   - key: /org/gnome/shell/extensions/user-theme/name
     value: "'Arc-Dark'"
   - key: /org/gnome/shell/enabled-extensions
-    value: "['background-logo@fedorahosted.org', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'dash-to-dock@micxgx.gmail.com']"
+    value: "['background-logo@fedorahosted.org', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'dash-to-dock@micxgx.gmail.com', 'Move_Clock@rmy.pobox.com', 'appindicatorsupport@rgcjonas.gmail.com', 'thinkpad-battery-threshold@marcosdalvarez.org', 'tiling-assistant@leleat-on-github']"
   - key: /org/gnome/shell/favorite-apps
-    value: "['org.mozilla.firefox.desktop', 'org.gnome.Nautilus.desktop']"
+    value: "['org.mozilla.firefox.desktop', 'org.gnome.Terminal.desktop']"
+  - key: /org/gnome/shell/keybindings/show-screenshot-ui
+    value: "['<Shift><Super>s']"
+  - key: /org/gnome/shell/overrides/edge-tiling
+    value: "false"
+  - key: /org/gnome/shell/extensions/thinkpad-battery-threshold/start-bat0
+    value: "{{ startChargeThreshold }}"
+  - key: /org/gnome/shell/extensions/thinkpad-battery-threshold/stop-bat0
+    value: "{{ endChargeThreshold }}"
   - key: /org/gnome/desktop/interface/icon-theme
-    value: "'Tela-dark'"
+    value: "'Tela'"
   - key: /org/gnome/desktop/interface/gtk-theme
-    value: "'Arc-Dark'"
+    value: "'Arc'"
   - key: /org/gnome/desktop/interface/clock-show-weekday
     value: "true"
   - key: /org/gnome/desktop/interface/show-battery-percentage
@@ -96,6 +112,8 @@ dconfSettings:
     value: "true"
   - key: /org/gnome/shell/weather/automatic-location
     value: "true"
+  - key: /org/gnome/desktop/remote-desktop/rdp/screen-share-mode
+    value: "'extend'"
   - key: /org/gnome/desktop/interface/text-scaling-factor
     value: "1"
   - key: /org/gnome/desktop/interface/font-antialiasing
