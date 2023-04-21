@@ -36,6 +36,7 @@ ostreeInstallRpms:
   - qemu-kvm
   - tmux
 ostreeUninstallRpms:
+  - firefox-langpacks
   - firefox
 toolboxInstallRpms:
   - zsh
