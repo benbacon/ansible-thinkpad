@@ -6,16 +6,14 @@ endChargeThreshold: 70
 wifiSSID: nameOfWPA3SSID
 # From https://extensions.gnome.org/
 gnome_extension_ids:
-  - 5004
+  - 307
   - 19
   - 2
-  - 906
   - 3733
   - 615
   - 4798
 flatpaks:
   - org.mozilla.firefox
-  - com.spotify.Client
   - com.visualstudio.code
   - org.remmina.Remmina
   - org.videolan.VLC
@@ -51,34 +49,32 @@ dconfSettings:
     value: "21"
   - key: /org/gnome/settings-daemon/plugins/color/night-light-schedule-to
     value: "7"
-  - key: /org/gnome/shell/extensions/dash-to-dock-pop/background-opacity
+  - key: /org/gnome/shell/extensions/dash-to-dock/background-opacity
     value: "0.8"
-  - key: /org/gnome/shell/extensions/dash-to-dock-pop-pop/click-action
+  - key: /org/gnome/shell/extensions/dash-to-dock/click-action
     value: "'previews'"
-  - key: /org/gnome/shell/extensions/dash-to-dock-pop-pop/scroll-action
+  - key: /org/gnome/shell/extensions/dash-to-dock/scroll-action
     value: "'cycle-windows'"
-  - key: /org/gnome/shell/extensions/dash-to-dock-pop/dash-max-icon-size
+  - key: /org/gnome/shell/extensions/dash-to-dock/dash-max-icon-size
     value: "32"
-  - key: /org/gnome/shell/extensions/dash-to-dock-pop/dock-alignment
+  - key: /org/gnome/shell/extensions/dash-to-dock/dock-alignment
     value: "'CENTRE'"
-  - key: /org/gnome/shell/extensions/dash-to-dock-pop/dock-fixed
+  - key: /org/gnome/shell/extensions/dash-to-dock/dock-fixed
     value: "true"
-  - key: /org/gnome/shell/extensions/dash-to-dock-pop/dock-position
+  - key: /org/gnome/shell/extensions/dash-to-dock/dock-position
     value: "'LEFT'"
-  - key: /org/gnome/shell/extensions/dash-to-dock-pop/extend-height
+  - key: /org/gnome/shell/extensions/dash-to-dock/extend-height
     value: "true"
-  - key: /org/gnome/shell/extensions/dash-to-dock-pop/show-trash
+  - key: /org/gnome/shell/extensions/dash-to-dock/show-trash
     value: "false"
-  - key: /org/gnome/shell/extensions/dash-to-dock-pop/isolate-monitors
+  - key: /org/gnome/shell/extensions/dash-to-dock/isolate-monitors
     value: "true"
-  - key: /org/gnome/shell/extensions/dash-to-dock-pop/scroll-action
+  - key: /org/gnome/shell/extensions/dash-to-dock/scroll-action
     value: "'cycle-windows'"
   - key: /org/gnome/shell/extensions/user-theme/name
-    value: "'Arc-Dark'"
-  - key: /org/gnome/shell/disabled-extensions
-    value: "['sound-output-device-chooser@kgshank.net']"
+    value: "'Arc-Light'"
   - key: /org/gnome/shell/enabled-extensions
-    value: "['background-logo@fedorahosted.org', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'dash-to-dock@micxgx.gmail.com', 'Move_Clock@rmy.pobox.com', 'appindicatorsupport@rgcjonas.gmail.com', 'thinkpad-battery-threshold@marcosdalvarez.org', 'wintile@nowsci.com', 'tiling-assistant@leleat-on-github', 'dash-to-dock-cosmic-@halfmexicanhalfamazing@gmail.com']"
+    value: "['background-logo@fedorahosted.org', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'dash-to-dock@micxgx.gmail.com', 'Move_Clock@rmy.pobox.com', 'appindicatorsupport@rgcjonas.gmail.com', 'thinkpad-battery-threshold@marcosdalvarez.org', 'tiling-assistant@leleat-on-github']"
   - key: /org/gnome/shell/favorite-apps
     value: "['org.mozilla.firefox.desktop', 'org.gnome.Terminal.desktop']"
   - key: /org/gnome/shell/keybindings/show-screenshot-ui
@@ -89,16 +85,10 @@ dconfSettings:
     value: "{{ startChargeThreshold }}"
   - key: /org/gnome/shell/extensions/thinkpad-battery-threshold/stop-bat0
     value: "{{ endChargeThreshold }}"
-  - key: /org/gnome/shell/extensions/sound-output-device-chooser/hide-on-single-device
-    value: "true"
-  - key: /org/gnome/shell/extensions/sound-output-device-chooser/integrate-with-slider
-    value: "true"
-  - key: /org/gnome/shell/extensions/sound-output-device-chooser/show-profiles
-    value: "true"
   - key: /org/gnome/desktop/interface/icon-theme
     value: "'Tela'"
   - key: /org/gnome/desktop/interface/gtk-theme
-    value: "'Arc'"
+    value: "'Arc-Light'"
   - key: /org/gnome/desktop/interface/clock-show-weekday
     value: "true"
   - key: /org/gnome/desktop/interface/show-battery-percentage
