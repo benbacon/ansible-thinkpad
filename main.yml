@@ -25,6 +25,9 @@
       failed_when:
         - ostreePackageRemove.rc > 0
         - '"Override already exists for package" not in ostreePackageRemove.stderr'
+      until: "ostreePackageRemove is not failed"
+      retries: 6
+      delay: 10
       notify:
       - Reboot
 
@@ -65,6 +68,10 @@
         name: "{{ item }}"
         state: present
       loop: "{{ flatpaks }}"
+      register: flatpakInstall
+      until: "flatpakInstall is not failed"
+      retries: 6
+      delay: 10
 
     - name: Change Firefox flatpak to use native Wayland
       ansible.builtin.command: flatpak override --socket=wayland --env=MOZ_ENABLE_WAYLAND=1 org.mozilla.firefox
