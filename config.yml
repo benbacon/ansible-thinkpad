@@ -73,7 +73,7 @@ dconfSettings:
   - key: /org/gnome/shell/extensions/dash-to-dock/scroll-action
     value: "'cycle-windows'"
   - key: /org/gnome/shell/extensions/user-theme/name
-    value: "'Arc-Light'"
+    value: "'Arc-Dark'"
   - key: /org/gnome/shell/enabled-extensions
     value: "['background-logo@fedorahosted.org', 'user-theme@gnome-shell-extensions.gcampax.github.com', 'dash-to-dock@micxgx.gmail.com', 'Move_Clock@rmy.pobox.com', 'appindicatorsupport@rgcjonas.gmail.com', 'thinkpad-battery-threshold@marcosdalvarez.org', 'tiling-assistant@leleat-on-github']"
   - key: /org/gnome/shell/favorite-apps
@@ -89,7 +89,7 @@ dconfSettings:
   - key: /org/gnome/desktop/interface/icon-theme
     value: "'Tela'"
   - key: /org/gnome/desktop/interface/gtk-theme
-    value: "'Arc-Light'"
+    value: "'Arc'"
   - key: /org/gnome/desktop/interface/clock-show-weekday
     value: "true"
   - key: /org/gnome/desktop/interface/show-battery-percentage
